@@ -1,0 +1,20 @@
+pragma solidity ^0.8.0;
+
+import "./AlumDAOTestEducation.sol";
+
+contract AlumDAOTestDonation is AlumDAOTestEducation {
+    // Move donation-related functions and logic here
+    // ...
+        function updateDonations(address patron, uint256 amount) public onlyAdmin {
+        _donations[patron] = amount;
+    }
+
+        function getDonationScore(address patron) public view returns (uint256) {
+        uint256 donations = _donations[patron];
+        uint256 donationScore = uint256(ln(donations / 500) * 10);
+
+        return donationScore;
+    }
+
+
+}
