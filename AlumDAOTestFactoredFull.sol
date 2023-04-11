@@ -241,7 +241,6 @@ contract AlumDAOTestBase is ERC721Enumerable, Ownable {
 
 pragma solidity ^0.8.0;
 
-import "./AlumDAOTestBase.sol";
 
 contract AlumDAOTestAdmin is AlumDAOTestBase {
 
@@ -257,7 +256,7 @@ contract AlumDAOTestAdmin is AlumDAOTestBase {
 
 pragma solidity ^0.8.0;
 
-import "./AlumDAOTestAdmin.sol";
+
 
 contract AlumDAOTestUniversity is AlumDAOTestAdmin {
 
@@ -321,7 +320,7 @@ contract AlumDAOTestUniversity is AlumDAOTestAdmin {
 
 pragma solidity ^0.8.0;
 
-import "./AlumDAOTestUniversity.sol";
+
 
 contract AlumDAOTestEducation is AlumDAOTestUniversity {
 
@@ -348,7 +347,7 @@ contract AlumDAOTestEducation is AlumDAOTestUniversity {
 
 pragma solidity ^0.8.0;
 
-import "./AlumDAOTestEducation.sol";
+
 
 contract AlumDAOTestDonation is AlumDAOTestEducation {
     // Move donation-related functions and logic here
@@ -371,7 +370,6 @@ contract AlumDAOTestDonation is AlumDAOTestEducation {
 pragma solidity ^0.8.0;
 
 import "./StringUtils.sol";
-import "./AlumDAOTestDonation.Sol";
 import "./AlumDAOTestActivityExternal.sol";
 
 
@@ -379,11 +377,11 @@ contract AlumDAOTestActivity is AlumDAOTestDonation {
     using StringUtils for bytes32;
     using SafeMath for uint256;
 
-    AlumDAOTestActivityExternal public activityExternal;
+     IAlumDAOTestActivityExternal public activityExternal;
 
-  constructor(address _activityExternal) {
-    activityExternal = _activityExternal;
-  }
+    constructor(address _alumDAOTestActivityExternalAddress) AlumDAOTestDonation() {
+    activityExternal = IAlumDAOTestActivityExternal(_alumDAOTestActivityExternalAddress);
+}
 
     function setDecayConstant(uint256 _decayConstant) public onlyAdmin {
         activityExternal.setDecayConstant(_decayConstant);
@@ -422,7 +420,6 @@ contract AlumDAOTestActivity is AlumDAOTestDonation {
 
 pragma solidity ^0.8.0;
 
-import "./AlumDAOTestActivity.sol";
 
 contract AlumDAOTestScore is AlumDAOTestActivity {
     // Move scoring-related functions and logic here
@@ -466,7 +463,6 @@ import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/token/ERC721/presets/ERC721PresetMinterPauserAutoId.sol";
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol";
 import "@openzeppelin/contracts/utils/math/Math.sol";
-import "./AlumDAOTestScore.sol";
 
 contract AlumDAOTestFactored is AlumDAOTestScore {
     // Keep the remaining functions here
